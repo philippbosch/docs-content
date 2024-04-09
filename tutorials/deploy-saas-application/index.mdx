@@ -1,11 +1,11 @@
 ---
 meta:
   title: Deploying a Software as-a-Service application with Scaleway
-  description: In this tutorial you will learn how to deploy a Software as-a-Service (SaaS) application, based on a SaaS application developed using Django Template.
+  description: In this tutorial you will learn how to deploy a Software as-a-Service (SaaS) application, based on a SaaS application developed using the Django framework.
 content:
   h1: Deploying a Software as-a-Service application with Scaleway
-  paragraph: In this tutorial you will learn how to deploy a Software as-a-Service (SaaS) application, based on a SaaS application developed using Django Template.
-tags: Saas software-as-a-Service software Django-Template boto3
+  paragraph: In this tutorial you will learn how to deploy a Software as-a-Service (SaaS) application, based on a SaaS application developed using the Django framework.
+tags: Saas software-as-a-Service software Django boto3
 categories: 
   - container-registry
   - object-storage
@@ -16,7 +16,7 @@ dates:
   posted: 2021-03-09
 ---
 
-In this tutorial you will learn how to deploy a Software as-a-Service (SaaS) application, based on a SaaS application developed using Django Template. You use the following Scaleway products:
+In this tutorial you will learn how to deploy a Software as-a-Service (SaaS) application, based on a SaaS application developed using the Django framework. You use the following Scaleway products:
 
 * [**Object Storage**](https://www.scaleway.com/en/object-storage/), to store your static files
 * [**Database as-a-Service**](https://www.scaleway.com/en/database/), for your data storage
@@ -30,7 +30,7 @@ You will learn how to store environment variables with Kubernetes secrets and us
 - A Scaleway account logged into the [console](https://console.scaleway.com)
 - [Owner](/identity-and-access-management/iam/concepts/#owner) status or [IAM permissions](/identity-and-access-management/iam/concepts/#permission) allowing you to perform actions in the intended Organization
 - A valid [API key](/identity-and-access-management/iam/how-to/create-api-keys/)
-- A SaaS application using [Django Template](https://docs.djangoproject.com/en/4.0/topics/templates/). **Note**: you may still follow this tutorial if you have used another technology for your SaaS application, but you need to adapt the Django settings used throughout this tutorial
+- A SaaS application using [Django](https://docs.djangoproject.com/). **Note**: you may still follow this tutorial if you have used another technology for your SaaS application, but you need to adapt the Django settings used throughout this tutorial
 - A private [Object Storage bucket](/storage/object/how-to/create-a-bucket/)
 - A [Scaleway Database](/managed-databases/postgresql-and-mysql/how-to/create-a-database/)
 - A private [Container Registry namespace](/containers/container-registry/how-to/create-namespace)
@@ -59,6 +59,7 @@ In all applications, you have to define settings, usually based on environment v
   </Message>
 
   This configuration is usually perfect for development. For a production environment, it can be desirable to have an alternative, e.g. using an Object Storage bucket. 
+
 2. Append the following code to your `settings.py` file. It adds new variables to set up the use of Object Storage as the static files' storage engine. It is recommended to keep the previous settings by default for development purposes.
     ```
     PROD = os.getenv('PROD')
@@ -79,6 +80,7 @@ In all applications, you have to define settings, usually based on environment v
     ```
 
     Before we look more closely at the variables we just added, further action is required. Since you have a new package (`boto3` in this case) used in the variable `STATICFILES_STORAGE`, you need to follow the next steps:
+
 3. Add the `boto3` package to your requirements list.
 4. Add the `boto3` package (`storages` app) to the list of applications used in your Django project in your `settings.py` file.
     ```
